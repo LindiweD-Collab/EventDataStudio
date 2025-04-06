@@ -1,10 +1,13 @@
-/* Example: Ensure charts don't overflow their containers */
+
 canvas {
     max-width: 100%;
-    height: auto !important; /* Override potential inline styles from Chart.js if needed */
+    height: auto !important;
 }
 
-/* Add some spacing */
+
 .card {
     margin-bottom: 1.5rem;
 }
+.custom-close-btn {
+    color: rgb(218, 185, 218);
+  }

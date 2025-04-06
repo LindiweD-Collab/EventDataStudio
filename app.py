@@ -149,7 +149,9 @@ def index():
     from datetime import datetime
 
     return render_template('index.html', now=datetime.now)
-
+@app.route('/about')
+def about():
+    return render_template('about.html')
 @app.route('/results')
 def results():
     # Retrieve filename from session

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload Event Data{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="mb-4 text-center text-primary">Upload Event Data CSV</h1>
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4>Analyze Your Event Data</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-muted">
+                            Select a CSV file containing your event data. Ensure it has columns like 
+                            <code>event_name</code>, <code>event_date</code>, <code>event_type</code>, etc.
+                        </p>
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="event_file" class="form-label fw-bold">CSV File:</label>
+                                <input class="form-control" type="file" id="event_file" name="event_file" accept=".csv" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-upload"></i> Upload & Analyze
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center text-muted">
+                        <small>Supported file type: <strong>.csv</strong> | Max size: <strong>16MB</strong></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

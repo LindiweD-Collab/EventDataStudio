@@ -1,0 +1,7 @@
+venv/
+*.pyc
+__pycache__/
+uploads/
+*.csv
+instance/
+.DS_Store

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Analysis Results{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Analysis Results for: <span class="text-primary">{{ filename }}</span></h1>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary mb-4">&larr; Upload Another File</a>
+
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-header">Overall Summary</div>
+                <div class="card-body">
+                     <p><strong>Total Events:</strong> {{ results.total_events }}</p>
+                     <p><strong>Date Range:</strong> {{ results.date_range[0] }} to {{ results.date_range[1] }}</p>
+                     <h5 class="mt-3">Statistics:</h5>
+                     {% if results.summary_stats %}
+                         <ul class="list-group list-group-flush">
+                         {% for key, value in results.summary_stats.items() %}
+                             <li class="list-group-item d-flex justify-content-between align-items-center">
+                                 {{ key }}
+                                 <span class="badge bg-primary rounded-pill">{{ value }}</span>
+                             </li>
+                         {% endfor %}
+                         </ul>
+                     {% else %}
+                         <p class="text-muted">No summary statistics available.</p>
+                     {% endif %}
+                     <h5 class="mt-3">Top 5 Event Types:</h5>
+                     {% if results.top_event_types %}
+                          <ul class="list-group list-group-flush">
+                         {% for type, count in results.top_event_types.items() %}
+                             <li class="list-group-item d-flex justify-content-between align-items-center">
+                                 {{ type }}
+                                 <span class="badge bg-secondary rounded-pill">{{ count }}</span>
+                             </li>
+                         {% endfor %}
+                         </ul>
+                     {% else %}
+                         <p class="text-muted">No event type data found.</p>
+                     {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+             <div class="row g-4">
+                <div class="col-md-6">
+                     <div class="card h-100">
+                         <div class="card-header">Events by Type</div>
+                         <div class="card-body">
+                            <canvas id="typeCountsChart"></canvas>
+                         </div>
+                     </div>
+                </div>
+                <div class="col-md-6">
+                     <div class="card h-100">
+                         <div class="card-header">Events by Location</div>
+                         <div class="card-body">
+                            <canvas id="locationCountsChart"></canvas>
+                         </div>
+                     </div>
+                </div>
+                <div class="col-12">
+                     <div class="card">
+                          <div class="card-header">Events per Month</div>
+                         <div class="card-body">
+                            <canvas id="monthlyCountsChart"></canvas>
+                         </div>
+                     </div>
+                </div>
+             </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const typeCountsData = JSON.parse('{{ type_counts_json | safe }}');
+        const locationCountsData = JSON.parse('{{ location_counts_json | safe }}');
+        const monthlyCountsData = JSON.parse('{{ monthly_counts_json | safe }}');
+    </script>
+    <script src="{{ url_for('static', filename='js/analysis.js') }}"></script>
+{% endblock %}

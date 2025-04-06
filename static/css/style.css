@@ -1,0 +1,10 @@
+/* Example: Ensure charts don't overflow their containers */
+canvas {
+    max-width: 100%;
+    height: auto !important; /* Override potential inline styles from Chart.js if needed */
+}
+
+/* Add some spacing */
+.card {
+    margin-bottom: 1.5rem;
+}
